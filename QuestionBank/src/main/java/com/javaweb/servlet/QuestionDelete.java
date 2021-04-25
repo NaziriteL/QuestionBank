@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class QuestionDelete
  */
-@WebServlet(description = "Ìá¹©ÌâÄ¿É¾³ıµÄ·şÎñ", urlPatterns = { "/question/delete" })
+@WebServlet(description = "æä¾›é¢˜ç›®åˆ é™¤çš„æœåŠ¡", urlPatterns = { "/question/delete" })
 public class QuestionDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,7 +44,7 @@ public class QuestionDelete extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
-		//¶ÁÈ¡Á÷
+		//è¯»å–æµ
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(), "utf-8");
 		String result = "";
 		int respInt = insr.read();

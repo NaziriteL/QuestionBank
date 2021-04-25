@@ -36,43 +36,43 @@ public class PaperPrintImpl implements IPaperPrint {
                 dir.mkdirs();
             }
             stream = new FileOutputStream(dir);
-            //´´½¨512×Ö½Ú»º³åÇø
+            //åˆ›å»º512å­—èŠ‚ç¼“å†²åŒº
             bufferStream = new BufferedOutputStream(stream, 512);
-            // ´´½¨Ò»¸ö¶ÎÂä
+            // åˆ›å»ºä¸€ä¸ªæ®µè½
             XWPFParagraph p1 = document.createParagraph();
-            // ÉèÖÃ¾ÓÖĞ
+            // è®¾ç½®å±…ä¸­
             p1.setAlignment(ParagraphAlignment.CENTER);
             XWPFRun r1 = p1.createRun();
-           // ÊÇ·ñ¼Ó´Ö
+           // æ˜¯å¦åŠ ç²—
             r1.setBold(true);
-            // ÓëÏÂÒ»ĞĞµÄ¾àÀë
+            // ä¸ä¸‹ä¸€è¡Œçš„è·ç¦»
             r1.setTextPosition(30);
-            r1.setText("ÊÔ¾í");
-            // ×ÖÌå´óĞ¡
-            r1.setFontSize(18);// ×ÖÌå´óĞ¡
-            // Ôö¼Ó»»ĞĞ
+            r1.setText("è¯•å·");
+            // å­—ä½“å¤§å°
+            r1.setFontSize(18);// å­—ä½“å¤§å°
+            // å¢åŠ æ¢è¡Œ
             r1.addCarriageReturn();            
             
             int i= 1;
             for(QuestionPrint qp : qps) {
-            	// ´´½¨ĞÂ¶ÎÂä       	
+            	// åˆ›å»ºæ–°æ®µè½       	
                 XWPFParagraph p2 = document.createParagraph();
                 XWPFRun r2 = p2.createRun();
-                r2.setText(i + "¡¢" + qp.getContent());
+                r2.setText(i + "ã€" + qp.getContent());
                 r2.addCarriageReturn();
-                r2.setText('A' + qp.getOptions()[0]);
+                r2.setText("(A) " + qp.getOptions()[0]);
                 r2.addCarriageReturn();
-                r2.setText('B' + qp.getOptions()[1]);
+                r2.setText("(B) " + qp.getOptions()[1]);
                 r2.addCarriageReturn();
-                r2.setText('C' + qp.getOptions()[2]);
+                r2.setText("(C) " + qp.getOptions()[2]);
                 r2.addCarriageReturn();
-                r2.setText('D' + qp.getOptions()[3]);
+                r2.setText("(D) " + qp.getOptions()[3]);
                 r2.addCarriageReturn();
-                r2.setText("´ğ°¸Îª£º "+ANSWER_MAP[qp.getAnswer() - 1]);
+                r2.setText("ç­”æ¡ˆä¸ºï¼š "+ANSWER_MAP[qp.getAnswer() - 1]);
                 r2.addCarriageReturn();
                 r2.addCarriageReturn();
-                r2.setFontFamily("·ÂËÎ");		// ÉèÖÃ×ÖÌå
-                r2.setFontSize(14);		// ×ÖÌå´óĞ¡
+                r2.setFontFamily("ä»¿å®‹");		// è®¾ç½®å­—ä½“
+                r2.setFontSize(14);		// å­—ä½“å¤§å°
                 document.write(stream);
                 i++;
             }

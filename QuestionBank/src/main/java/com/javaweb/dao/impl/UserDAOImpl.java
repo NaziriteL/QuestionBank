@@ -10,19 +10,19 @@ import com.javaweb.dao.IUserDAO;
 import com.javaweb.vo.User;
 
 public class UserDAOImpl implements IUserDAO {
-	//¾Ö²¿Êı¾İ¿âÁ¬½Ó¶ÔÏó
+	//å±€éƒ¨æ•°æ®åº“è¿æ¥å¯¹è±¡
 	private Connection conn;
-	//¾Ö²¿Êı¾İÂ·²Ù×÷¶ÔÏó;
+	//å±€éƒ¨æ•°æ®è·¯æ“ä½œå¯¹è±¡;
 	private PreparedStatement pstmt;
 	/*
-	* ÊµÀı»¯Êı¾İ²ãµÄ×Ó²ã¶ÔÏó£¬Í¬Ê±´«ÈëÒ»¸öÊı¾İ¿âÁ¬½Ó¶ÔÏó
-	* @param conn ÊÇConnectionÁ¬½Ó¶ÔÏó£¬Èç¹ûÎªnullÔò±íÊ¾Êı¾İ¿âÃ»ÓĞ´ò¿ª
+	* å®ä¾‹åŒ–æ•°æ®å±‚çš„å­å±‚å¯¹è±¡ï¼ŒåŒæ—¶ä¼ å…¥ä¸€ä¸ªæ•°æ®åº“è¿æ¥å¯¹è±¡
+	* @param conn æ˜¯Connectionè¿æ¥å¯¹è±¡ï¼Œå¦‚æœä¸ºnullåˆ™è¡¨ç¤ºæ•°æ®åº“æ²¡æœ‰æ‰“å¼€
 	*/
 	public UserDAOImpl(Connection conn) {
 		this.conn = conn;
 	}
 	/*
-	 * @return ·µ»Ø³¤¶ÈÎª2µÄ²¼¶ûÖµÊı×é£¬¡¾f,f]´ú±íÓÃ»§Ôò´ú±íÓÃ²»´æÔÚ,[f,t]´ú±íÓÃ»§ÊäÈëÃÜÂë´íÎó,[t,f]´ú±íÆÕÍ¨ÓÃ»§,[t,t]´ú±í¹ÜÀíÓÃ»§
+	 * @return è¿”å›é•¿åº¦ä¸º2çš„å¸ƒå°”å€¼æ•°ç»„ï¼Œã€f,f]ä»£è¡¨ç”¨æˆ·åˆ™ä»£è¡¨ç”¨ä¸å­˜åœ¨,[f,t]ä»£è¡¨ç”¨æˆ·è¾“å…¥å¯†ç é”™è¯¯,[t,f]ä»£è¡¨æ™®é€šç”¨æˆ·,[t,t]ä»£è¡¨ç®¡ç†ç”¨æˆ·
 	 */
 	@Override
 	public boolean[] findByIdAndPass(String username, String password) throws Exception{

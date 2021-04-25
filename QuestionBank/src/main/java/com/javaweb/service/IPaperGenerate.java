@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface IPaperGenerate {
 	/*
-	 * 自动生成试卷方法
+	 * 鑷姩鐢熸垚璇曞嵎鏂规硶
 	 */
 	public List<QuestionPrint> getAutoPaper(AutoPaper ap) throws Exception;
 	/*
-	 * 手动生成试卷方法
+	 * 鎵嬪姩鐢熸垚璇曞嵎鏂规硶
 	 */
 	public List<QuestionPrint> getManualPaper(List<Integer> ids) throws Exception;
 }

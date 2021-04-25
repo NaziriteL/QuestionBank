@@ -19,21 +19,21 @@ public class CharSetAndLoginFilter implements Filter {
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		//½«servletRequest×ª·¢ÎªHttpServletRequest
+		//å°†servletRequestè½¬å‘ä¸ºHttpServletRequest
 		HttpServletRequest request = (HttpServletRequest)arg0;
 		HttpServletResponse response = (HttpServletResponse)arg1;
-		//Í³Ò»ÇëÇóÎªUTF-8
+		//ç»Ÿä¸€è¯·æ±‚ä¸ºUTF-8
 		request.setCharacterEncoding("utf-8");
 		String currentURL = request.getRequestURI();
 		String contextPath = request.getContextPath();
-		//³ıµôÏîÄ¿Ãû³ÆÊ±·ÃÎÊÒ³Ãæµ±Ç°Â·¾¶
+		//é™¤æ‰é¡¹ç›®åç§°æ—¶è®¿é—®é¡µé¢å½“å‰è·¯å¾„
 		String targetURL = currentURL.substring(contextPath.length());
-		HttpSession session = request.getSession(false);//»ñÈ¡²»µ½sessionµÄÊ±ºò£¬²»»á×Ô¶¯´´½¨session£¬¶øÊÇ»á·µ»Ønull
-		//¶Ôµ±Ç°Ò³Ãæ½øĞĞÅĞ¶Ï£¬Èç¹ûµ±Ç°Ò³Ãæ²»ÎªµÇÂ¼Ò³Ãæ
+		HttpSession session = request.getSession(false);//è·å–ä¸åˆ°sessionçš„æ—¶å€™ï¼Œä¸ä¼šè‡ªåŠ¨åˆ›å»ºsessionï¼Œè€Œæ˜¯ä¼šè¿”å›null
+		//å¯¹å½“å‰é¡µé¢è¿›è¡Œåˆ¤æ–­ï¼Œå¦‚æœå½“å‰é¡µé¢ä¸ä¸ºç™»å½•é¡µé¢
 		if(session != null && session.getAttribute("username") != null){
 			if(targetURL.equals(ADMIN_PAGE)) {
 				if((boolean) session.getAttribute("isMulti")) {
-					//ÕâÀï±íÊ¾ÕıÈ·£¬»áÈ¥Ñ°ÕÒÏÂÒ»¸öÁ´£¬Èç¹û²»´æÔÚ£¬Ôò½øĞĞÕı³£µÄÒ³ÃæÌø×ª		
+					//è¿™é‡Œè¡¨ç¤ºæ­£ç¡®ï¼Œä¼šå»å¯»æ‰¾ä¸‹ä¸€ä¸ªé“¾ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿›è¡Œæ­£å¸¸çš„é¡µé¢è·³è½¬		
 					arg2.doFilter(request, response);	
 				}else {
 					response.sendRedirect(LOGIN_PAGE);	

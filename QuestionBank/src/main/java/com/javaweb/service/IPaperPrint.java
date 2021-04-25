@@ -5,7 +5,7 @@ import com.javaweb.vo.QuestionPrint;
 
 public interface IPaperPrint {
 	/*
-	 * 生成选定试卷的word文档，成功返回r=true,否则返回false
+	 * 鐢熸垚閫夊畾璇曞嵎鐨剋ord鏂囨。锛屾垚鍔熻繑鍥瀝=true,鍚﹀垯杩斿洖false
 	 */
 	public boolean createPaperDocument(List<QuestionPrint> qps);
 }

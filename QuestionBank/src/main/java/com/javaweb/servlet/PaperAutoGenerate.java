@@ -44,7 +44,7 @@ public class PaperAutoGenerate extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//¶ÁÈ¡Á÷
+		//è¯»å–æµ
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
 		String result = "";
 		int respInt = insr.read();
@@ -56,7 +56,7 @@ public class PaperAutoGenerate extends HttpServlet {
 		
 		AutoPaper ap = JSON.parseObject(result,AutoPaper.class);
 		
-		//±£´æÌâÄ¿¼¯ºÏ
+		//ä¿å­˜é¢˜ç›®é›†åˆ
 		ObjectListTemplate<QuestionPrint> out = new ObjectListTemplate<QuestionPrint>();
 		try {	
 			out.setIndex(ServiceFactory.getIPaperGenerateInstance().getAutoPaper(ap));
@@ -65,7 +65,7 @@ public class PaperAutoGenerate extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(!ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getIndex())) {
-			//Î´Éú³ÉÊ±ÉèÖÃ¿ÕÖµ
+			//æœªç”Ÿæˆæ—¶è®¾ç½®ç©ºå€¼
 			out.setIndex(null);
 		}
 		response.getWriter().write(JSON.toJSONString(out));

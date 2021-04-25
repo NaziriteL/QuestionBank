@@ -5,15 +5,15 @@ import com.javaweb.vo.Question;
 import com.javaweb.vo.QuestionPrint;
 import java.util.List;
 /*
- * ¶¨ÒåÌâ¿âÊı¾İ±íµÄÊı¾İ²ã²Ù×÷±ê×¼
+ * å®šä¹‰é¢˜åº“æ•°æ®è¡¨çš„æ•°æ®å±‚æ“ä½œæ ‡å‡†
  * @author LJW
  */
 public interface IQuestionDAO extends IDAO<Question,Integer>{
 	/*
-	 * ÓÉÊÔ¾í¿éÒªÇó£¬À´»ñÈ¡ÒªÇóµÄÊıÁ¿µÄËæ»úÑ¡È¡µÄÊÔÌâ¿é
-	 * @param ab Ò»·İÊÔ¾í¿é£¬°üº¬¶Ô´Ë¿éÌâÄ¿µÄÒªÇó
-	 * @param return Èç¹ûÊı¾İÄÜ¹»Âú×ãÊÔ¾í¿éÒªÇó£¬Ôò·µ»ØÒ»·İÊÔÌâ¿é£¬·ñÔò·µ»Ønull
-	 * @throws Exception Èç¹ûÊı¾İÂ·Ã»ÓĞÁ¬½Ó£¬Ôò³öÏÖNullPointerException,Èç¹ûSQLÓï¾ä´íÎóÔòÅ×³öSQLException
+	 * ç”±è¯•å·å—è¦æ±‚ï¼Œæ¥è·å–è¦æ±‚çš„æ•°é‡çš„éšæœºé€‰å–çš„è¯•é¢˜å—
+	 * @param ab ä¸€ä»½è¯•å·å—ï¼ŒåŒ…å«å¯¹æ­¤å—é¢˜ç›®çš„è¦æ±‚
+	 * @param return å¦‚æœæ•°æ®èƒ½å¤Ÿæ»¡è¶³è¯•å·å—è¦æ±‚ï¼Œåˆ™è¿”å›ä¸€ä»½è¯•é¢˜å—ï¼Œå¦åˆ™è¿”å›null
+	 * @throws Exception å¦‚æœæ•°æ®è·¯æ²¡æœ‰è¿æ¥ï¼Œåˆ™å‡ºç°NullPointerException,å¦‚æœSQLè¯­å¥é”™è¯¯åˆ™æŠ›å‡ºSQLException
 	 */
 	public List<QuestionPrint> getAutoBlockByRequest(AutoBlock ab) throws Exception; 
 	/*
@@ -25,10 +25,10 @@ public interface IQuestionDAO extends IDAO<Question,Integer>{
 	 */
 	public List<String[]> getAllTitle() throws Exception;
 	/*
-	 * »ñÈ¡ĞèÒª²éÑ¯µÄÌâÄ¿µÄ²Ù×÷£¬Ö´ĞĞselect²Ù×÷
-	 * @param q °üº¬ÁËËùÓĞ¿ÉÄÜ²éÑ¯ĞèÒªµÄÒªÇó²ÎÊı£¬ºÍ¾ßÌåÊÇÄÄ¼¸¸ö²ÎÊıÊÇĞèÒª(·Ç¿Õ)
-	 * @return ·µ»ØËùÓĞ·ûºÏ²éÑ¯ÒªÇóµÄÌâÄ¿¼¯ºÏ
-	 * @throws Exception  IQuestionDAO½Ó¿ÚÖĞµÄÒì³£
+	 * è·å–éœ€è¦æŸ¥è¯¢çš„é¢˜ç›®çš„æ“ä½œï¼Œæ‰§è¡Œselectæ“ä½œ
+	 * @param q åŒ…å«äº†æ‰€æœ‰å¯èƒ½æŸ¥è¯¢éœ€è¦çš„è¦æ±‚å‚æ•°ï¼Œå’Œå…·ä½“æ˜¯å“ªå‡ ä¸ªå‚æ•°æ˜¯éœ€è¦(éç©º)
+	 * @return è¿”å›æ‰€æœ‰ç¬¦åˆæŸ¥è¯¢è¦æ±‚çš„é¢˜ç›®é›†åˆ
+	 * @throws Exception  IQuestionDAOæ¥å£ä¸­çš„å¼‚å¸¸
 	 */
 	public List<Question> findQuestionByTitle(Question vo)throws Exception;
 	public List<Question> findQuestionByTitleAndDifficulty(Question vo)throws Exception;

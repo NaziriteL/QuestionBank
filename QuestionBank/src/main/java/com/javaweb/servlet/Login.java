@@ -17,7 +17,7 @@ import com.javaweb.factory.ServiceFactory;
 /**
  * Servlet implementation class Login
  */
-@WebServlet(description = "¸ºÔğÓÃ»§µÇÂ½ÑéÖ¤", urlPatterns = {"/login"})
+@WebServlet(description = "è´Ÿè´£ç”¨æˆ·ç™»é™†éªŒè¯", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
 		
-		//¶ÁÈ¡Á÷
+		//è¯»å–æµ
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
 		String result = "";
 		int respInt = insr.read();
@@ -67,24 +67,24 @@ public class Login extends HttpServlet {
 				//response.setContentType("text/html;charset=UTF-8");
 				session.setAttribute("username", username);
 				if(res[1]) {
-		        	object.put("result","µÇÂ½³É¹¦£¬¹ÜÀíÕËºÅ");
+		        	object.put("result","ç™»é™†æˆåŠŸï¼Œç®¡ç†è´¦å·");
 		        	session.setAttribute("isAdmin",true);
 					response.getWriter().write(String.valueOf(object));				
 					response.getWriter().close();
 					//response.setHeader("Refresh", "5;url='QuestionBank/404.html'");
 				}else {
-					object.put("result","µÇÂ½³É¹¦£¬ÆÕÍ¨ÕËºÅ");
+					object.put("result","ç™»é™†æˆåŠŸï¼Œæ™®é€šè´¦å·");
 					session.setAttribute("isAdmin",false);
 					response.getWriter().write(String.valueOf(object));		
 					response.getWriter().close();
 				}
 			}else {	
 				if(res[1]) {
-		        	object.put("result","µÇÂ½Ê§°Ü£¬ÃÜÂë´íÎó");
+		        	object.put("result","ç™»é™†å¤±è´¥ï¼Œå¯†ç é”™è¯¯");
 					response.getWriter().write(String.valueOf(object));
 					response.getWriter().close();
 				}else {
-					object.put("result","µÇÂ½Ê§°Ü£¬ÓÃ»§²»´æÔÚ");
+					object.put("result","ç™»é™†å¤±è´¥ï¼Œç”¨æˆ·ä¸å­˜åœ¨");
 					response.getWriter().write(String.valueOf(object));
 					response.getWriter().close();
 				}
@@ -96,8 +96,8 @@ public class Login extends HttpServlet {
 		}		
 		/*
 			response.setContentType("text/html;charset=UTF-8");
-	        response.getWriter().write("5ÃëºóÌø×ªÒ³Ãæ.....");
-	        //ÈıÃëºóÌø×ªµ½index.jspÒ³ÃæÈ¥£¬webÓ¦ÓÃµÄÓ³ÉäÂ·¾¶ÎÒÉèÖÃ³É/£¬urlÃ»ÓĞĞ´ÉÏÓ¦ÓÃÃû
+	        response.getWriter().write("5ç§’åè·³è½¬é¡µé¢.....");
+	        //ä¸‰ç§’åè·³è½¬åˆ°index.jspé¡µé¢å»ï¼Œwebåº”ç”¨çš„æ˜ å°„è·¯å¾„æˆ‘è®¾ç½®æˆ/ï¼Œurlæ²¡æœ‰å†™ä¸Šåº”ç”¨å
 	        response.setHeader("Refresh", "5;url='JavaWebDemo/index.html'");
 		*/
 	}

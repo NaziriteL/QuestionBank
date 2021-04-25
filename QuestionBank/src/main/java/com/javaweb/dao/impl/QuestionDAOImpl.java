@@ -11,13 +11,13 @@ import com.javaweb.vo.QuestionPrint;
 import com.javaweb.dao.IQuestionDAO;
 
 public class QuestionDAOImpl implements IQuestionDAO {
-	//¾Ö²¿Êı¾İ¿âÁ¬½Ó¶ÔÏó
+	//å±€éƒ¨æ•°æ®åº“è¿æ¥å¯¹è±¡
 	private Connection conn;
-	//¾Ö²¿Êı¾İÂ·²Ù×÷¶ÔÏó;
+	//å±€éƒ¨æ•°æ®è·¯æ“ä½œå¯¹è±¡;
 	private PreparedStatement pstmt;
 	/*
-	 * ÊµÀı»¯Êı¾İ²ãµÄ×Ó²ã¶ÔÏó£¬Í¬Ê±´«ÈëÒ»¸öÊı¾İ¿âÁ¬½Ó¶ÔÏó
-	 * @param conn ÊÇConnectionÁ¬½Ó¶ÔÏó£¬Èç¹ûÎªnullÔò±íÊ¾Êı¾İ¿âÃ»ÓĞ´ò¿ª
+	 * å®ä¾‹åŒ–æ•°æ®å±‚çš„å­å±‚å¯¹è±¡ï¼ŒåŒæ—¶ä¼ å…¥ä¸€ä¸ªæ•°æ®åº“è¿æ¥å¯¹è±¡
+	 * @param conn æ˜¯Connectionè¿æ¥å¯¹è±¡ï¼Œå¦‚æœä¸ºnullåˆ™è¡¨ç¤ºæ•°æ®åº“æ²¡æœ‰æ‰“å¼€
 	 */
 	public QuestionDAOImpl(Connection conn) {
 		this.conn=conn;
@@ -82,9 +82,9 @@ public class QuestionDAOImpl implements IQuestionDAO {
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, vo.getMainTitle());
 		this.pstmt.setString(2, vo.getSubTitle());
-		//Í¼ÎÄµÄ»°ÕâÀïÒªÖØĞ´
+		//å›¾æ–‡çš„è¯è¿™é‡Œè¦é‡å†™
 		this.pstmt.setString(3, vo.getContent());
-		//½«ËÄ¸öÑ¡Ïî¼ÓÉÏ·Ö¸ô·ûÒ»ÆğÂ¼ÈëÊı¾İ¿â
+		//å°†å››ä¸ªé€‰é¡¹åŠ ä¸Šåˆ†éš”ç¬¦ä¸€èµ·å½•å…¥æ•°æ®åº“
 		for(String str : vo.getOptions()){
 			sb.append(str).append("---");
 		}

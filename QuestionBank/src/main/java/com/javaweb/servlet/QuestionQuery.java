@@ -19,7 +19,7 @@ import com.javaweb.vo.Question;
 /**
  * Servlet implementation class QuestionQuery
  */
-@WebServlet(description = "Ìá¹©¶àÖÖÌâÄ¿²éÑ¯·½Ê½", urlPatterns = { "/question/query" })
+@WebServlet(description = "æä¾›å¤šç§é¢˜ç›®æŸ¥è¯¢æ–¹å¼", urlPatterns = { "/question/query" })
 public class QuestionQuery extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,7 +44,7 @@ public class QuestionQuery extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//¶ÁÈ¡Á÷
+		//è¯»å–æµ
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
 		String result = "";
 		int respInt = insr.read();
@@ -58,13 +58,13 @@ public class QuestionQuery extends HttpServlet {
 		ObjectListTemplate<Question> out = new ObjectListTemplate<Question>();
 		List<Question> list = new ArrayList<Question>();
 		/*
-		 * ²éÕÒ·şÎñÖÖÀà£¬´ú±íº¬Òå£º
-		 * 0:Í¨¹ıID²éÕÒ
-		 * 1:Í¨¹ı±êÌâ²éÕÒ
-		 * 2:Í¨¹ı±êÌâºÍ±êÇ©²éÕÒ
-		 * 3:Í¨¹ı±êÌâºÍÄÑ¶ÈÖµ²éÕÒ
-		 * 4:Í¨¹ı±êÌâºÍÊÇ·ñ¶àÑ¡²éÕÒ
-		 * 5:Í¨¹ı±êÌâºÍÌâ¸É²éÕÒ
+		 * æŸ¥æ‰¾æœåŠ¡ç§ç±»ï¼Œä»£è¡¨å«ä¹‰ï¼š
+		 * 0:é€šè¿‡IDæŸ¥æ‰¾
+		 * 1:é€šè¿‡æ ‡é¢˜æŸ¥æ‰¾
+		 * 2:é€šè¿‡æ ‡é¢˜å’Œæ ‡ç­¾æŸ¥æ‰¾
+		 * 3:é€šè¿‡æ ‡é¢˜å’Œéš¾åº¦å€¼æŸ¥æ‰¾
+		 * 4:é€šè¿‡æ ‡é¢˜å’Œæ˜¯å¦å¤šé€‰æŸ¥æ‰¾
+		 * 5:é€šè¿‡æ ‡é¢˜å’Œé¢˜å¹²æŸ¥æ‰¾
 		 */
 		switch(qs.getServiceType()) {
 		case 0:

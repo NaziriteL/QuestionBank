@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class 
  */
-@WebServlet(description = "ÓÃ»§ÕË»§ĞÅÏ¢ĞŞ¸Ä", urlPatterns = { "/user/alter" })
+@WebServlet(description = "ç”¨æˆ·è´¦æˆ·ä¿¡æ¯ä¿®æ”¹", urlPatterns = { "/user/alter" })
 public class UserAlter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class UserAlter extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
-		//¶ÁÈ¡Á÷
+		//è¯»å–æµ
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(), "utf-8");
 		String result = "";
 		int respInt = insr.read();

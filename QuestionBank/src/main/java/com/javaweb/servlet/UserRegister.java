@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserCreate
  */
-@WebServlet(description = "负责用户登陆验证", urlPatterns = {"/user/register"})
+@WebServlet(description = "璐熻矗鐢ㄦ埛鐧婚檰楠岃瘉", urlPatterns = {"/user/register"})
 public class UserRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

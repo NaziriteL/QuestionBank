@@ -8,29 +8,29 @@ public class DBConnection {
 	
 	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/question_bank?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-    // Êı¾İ¿âµÄÓÃ»§ÃûÓëÃÜÂë£¬ĞèÒª¸ù¾İ×Ô¼ºµÄÉèÖÃ
+    // æ•°æ®åº“çš„ç”¨æˆ·åä¸å¯†ç ï¼Œéœ€è¦æ ¹æ®è‡ªå·±çš„è®¾ç½®
 	private static final String USER = "Ether";
 	private static final String PASS = "1862mvpHL2";
 	private Connection conn = null;
 	/*
-	 * Á¬½ÓÊı¾İ¿âµÄ·½·¨
+	 * è¿æ¥æ•°æ®åº“çš„æ–¹æ³•
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 * @return
 	 */
 	public DBConnection(){
 		try {
-			//System.out.println("²âÊÔ¼ÓÔØÊı¾İ¿â....");
-			Class.forName(JDBC_DRIVER);//¼ÓÔØÊı¾İ¿âÇı¶¯
-			//System.out.println("²âÊÔ¼ÓÔØÊı¾İ¿â³É¹¦");
+			//System.out.println("æµ‹è¯•åŠ è½½æ•°æ®åº“....");
+			Class.forName(JDBC_DRIVER);//åŠ è½½æ•°æ®åº“é©±åŠ¨
+			//System.out.println("æµ‹è¯•åŠ è½½æ•°æ®åº“æˆåŠŸ");
 			this.conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			//System.out.println("²âÊÔÊı¾İ¿âÁ´½Ó³É¹¦");
+			//System.out.println("æµ‹è¯•æ•°æ®åº“é“¾æ¥æˆåŠŸ");
 		} catch(SQLException se) {
-			// ´¦Àí JDBC ´íÎó
+			// å¤„ç† JDBC é”™è¯¯
             se.printStackTrace();
 		}
 		catch (Exception e) {
-			// ´¦Àí ¼ÓÔØ²»µ½ÀàµÈ´íÎó ´íÎó
+			// å¤„ç† åŠ è½½ä¸åˆ°ç±»ç­‰é”™è¯¯ é”™è¯¯
 			e.printStackTrace();
 		}
 	}
@@ -39,11 +39,11 @@ public class DBConnection {
 		return this.conn;
 	}
 	/*
-	 * ¹Ø±ÕÊı¾İ¿âµÄ·½·¨,²»¹ÜÊÇ·ñÁ¬½ÓÉÏ£¬Ö´ĞĞ´Ë²Ù×÷¶¼²»»á³ö´í
+	 * å…³é—­æ•°æ®åº“çš„æ–¹æ³•,ä¸ç®¡æ˜¯å¦è¿æ¥ä¸Šï¼Œæ‰§è¡Œæ­¤æ“ä½œéƒ½ä¸ä¼šå‡ºé”™
 	 */
 	public void close(){
-		if(this.conn != null){	//Èç¹ûÈ·ÊµÈ¡µÃÁËÁ¬½Ó
-			try {	//¹Ø±ÕÁ¬½Ó
+		if(this.conn != null){	//å¦‚æœç¡®å®å–å¾—äº†è¿æ¥
+			try {	//å…³é—­è¿æ¥
 				this.conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -54,7 +54,7 @@ public class DBConnection {
 	/*public static void main(String[] args) {
 		try {
 			BaseMysql.getCon();
-			System.out.println("²âÊÔÊı¾İ¿â³É¹¦");
+			System.out.println("æµ‹è¯•æ•°æ®åº“æˆåŠŸ");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

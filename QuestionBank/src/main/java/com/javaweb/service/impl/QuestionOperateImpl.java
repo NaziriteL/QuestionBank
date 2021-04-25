@@ -14,7 +14,7 @@ public class QuestionOperateImpl implements IQuestionOperate {
 		// TODO Auto-generated method stub
 		try {
 			for(Question vo : vos) {
-				if(queryQuestionByTitleAndContent(vo.getMainTitle(), vo.getSubTitle(), vo.getContent())  == null) {
+				if(DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).findQuestionByTitleAndConent(vo) == null) {
 					if(!DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).doCreate(vo)) {
 						return false;
 					}

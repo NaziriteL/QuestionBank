@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class QuestionInput
  */
-@WebServlet(description = "Ìá¹©ÓÃ»§ÊäÈëÌâÄ¿·şÎñ", urlPatterns = { "/question/input" })
+@WebServlet(description = "æä¾›ç”¨æˆ·è¾“å…¥é¢˜ç›®æœåŠ¡", urlPatterns = { "/question/input" })
 public class QuestionInput extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,6 @@ public class QuestionInput extends HttpServlet {
 	 * Default constructor. 
 	 */
 	public QuestionInput() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -34,7 +33,6 @@ public class QuestionInput extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
@@ -46,7 +44,7 @@ public class QuestionInput extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
-		//¶ÁÈ¡Á÷
+		//è¯»å–æµ
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(), "utf-8");
 		String result = "";
 		int respInt = insr.read();

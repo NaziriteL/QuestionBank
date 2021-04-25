@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserIndex
  */
-@WebServlet(description = "返回用户账户列表", urlPatterns = { "/user/index" })
+@WebServlet(description = "杩斿洖鐢ㄦ埛璐︽埛鍒楄〃", urlPatterns = { "/user/index" })
 public class UserIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

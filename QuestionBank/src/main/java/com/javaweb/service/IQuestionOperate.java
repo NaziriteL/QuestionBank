@@ -6,47 +6,47 @@ import com.javaweb.vo.Question;
 
 public interface IQuestionOperate {
 	/*
-	 * Â¼ÈëĞÂÌâÄ¿µÄ²Ù×÷£¬Ö´ĞĞinsert²Ù×÷
-	 * @param q °üº¬ÁËÌâÄ¿µÄÈ«²¿ĞÅÏ¢£¬³ıÁËidÊÇ²åÈëÊı¾İ¿â×Ô¶¯¸³ÖµµÄ£¬ÒÔ·½±ãÊı¾İ¿â½øĞĞË÷Òı
-	 * @return Èç¹ûÊı¾İÂ¼Èë³É¹¦Ôò·µ»Øtrue£¬·ñÔò·µ»Øfalse
-	 * @throws Exception IQuestionDAO½Ó¿ÚÖĞµÄÒì³£
+	 * å½•å…¥æ–°é¢˜ç›®çš„æ“ä½œï¼Œæ‰§è¡Œinsertæ“ä½œ
+	 * @param q åŒ…å«äº†é¢˜ç›®çš„å…¨éƒ¨ä¿¡æ¯ï¼Œé™¤äº†idæ˜¯æ’å…¥æ•°æ®åº“è‡ªåŠ¨èµ‹å€¼çš„ï¼Œä»¥æ–¹ä¾¿æ•°æ®åº“è¿›è¡Œç´¢å¼•
+	 * @return å¦‚æœæ•°æ®å½•å…¥æˆåŠŸåˆ™è¿”å›trueï¼Œå¦åˆ™è¿”å›false
+	 * @throws Exception IQuestionDAOæ¥å£ä¸­çš„å¼‚å¸¸
 	 */
 	public boolean inputQuestion(List<Question> vos)throws Exception;
 	/*
-	 * »ñÈ¡Ìâ¿âÖĞµÄËùÓĞÄ¿Â¼
-	 * @return ·µ»ØÒ»¸ö³¤¶ÈÎª2µÄÊı×éµÄÁĞ±í£¬¼´{[Ö÷±êÌâ][¸±±êÌâ],[Ö÷±êÌâ][¸±±êÌâ]...}
+	 * è·å–é¢˜åº“ä¸­çš„æ‰€æœ‰ç›®å½•
+	 * @return è¿”å›ä¸€ä¸ªé•¿åº¦ä¸º2çš„æ•°ç»„çš„åˆ—è¡¨ï¼Œå³{[ä¸»æ ‡é¢˜][å‰¯æ ‡é¢˜],[ä¸»æ ‡é¢˜][å‰¯æ ‡é¢˜]...}
 	 */
 	public List<String[]> getQuestionIndex()throws Exception;	
 	/*
-	 * ĞŞ¸ÄĞèÒªĞŞ¸ÄµÄÌâÄ¿µÄ²Ù×÷£¬Ö´ĞĞselectºÍupdate²Ù×÷
-	 * @param qq °üº¬ÁËËùÓĞ¿ÉÄÜ²éÑ¯ĞèÒªµÄÒªÇó²ÎÊı£¬ºÍ¾ßÌåÊÇÄÄ¼¸¸ö²ÎÊıÊÇĞèÒª
+	 * ä¿®æ”¹éœ€è¦ä¿®æ”¹çš„é¢˜ç›®çš„æ“ä½œï¼Œæ‰§è¡Œselectå’Œupdateæ“ä½œ
+	 * @param qq åŒ…å«äº†æ‰€æœ‰å¯èƒ½æŸ¥è¯¢éœ€è¦çš„è¦æ±‚å‚æ•°ï¼Œå’Œå…·ä½“æ˜¯å“ªå‡ ä¸ªå‚æ•°æ˜¯éœ€è¦
 	 * @param 
 	 */
 	public boolean alterQuestion(Question vo)throws Exception;
 	/*
-	 * É¾³ıÑ¡¶¨µÄÌâÄ¿µÄ²Ù×÷£¬Ö´ĞĞdoRemove()·½·¨
-	 * @param mainTitle °üº¬ÁËĞèÒªÉ¾³ıÌâÄ¿µÄÖ÷±êÌâ
-	 * @param subTitle °üº¬ÁËĞèÒªÉ¾³ıÌâÄ¿µÄ¸±±êÌâ
-	 * @param content °üº¬ÁËĞèÒªÉ¾³ıÌâÄ¿µÄÌâ¸É
-	 * @return Èç¹ûÉ¾³ı³É¹¦Ôò·µ»Øtrue,·ñÔò·µ»Øfalse 
+	 * åˆ é™¤é€‰å®šçš„é¢˜ç›®çš„æ“ä½œï¼Œæ‰§è¡ŒdoRemove()æ–¹æ³•
+	 * @param mainTitle åŒ…å«äº†éœ€è¦åˆ é™¤é¢˜ç›®çš„ä¸»æ ‡é¢˜
+	 * @param subTitle åŒ…å«äº†éœ€è¦åˆ é™¤é¢˜ç›®çš„å‰¯æ ‡é¢˜
+	 * @param content åŒ…å«äº†éœ€è¦åˆ é™¤é¢˜ç›®çš„é¢˜å¹²
+	 * @return å¦‚æœåˆ é™¤æˆåŠŸåˆ™è¿”å›true,å¦åˆ™è¿”å›false 
 	 */
 	public boolean deleteQuestion(Integer id)throws Exception;
 	/*
-	 * »ñÈ¡ĞèÒª²éÑ¯µÄÌâÄ¿µÄ²Ù×÷£¬Ö´ĞĞfindQuestion()·½·¨
-	 * @param °üº¬ÁËËùÓĞ¿ÉÄÜ²éÑ¯ĞèÒªµÄÒªÇó²ÎÊı
-	 * @return ·µ»ØËùÓĞ·ûºÏ²éÑ¯ÒªÇóµÄÌâÄ¿¼¯ºÏ
-	 * @throws Exception  IQuestionDAO½Ó¿ÚÖĞµÄÒì³£
+	 * è·å–éœ€è¦æŸ¥è¯¢çš„é¢˜ç›®çš„æ“ä½œï¼Œæ‰§è¡ŒfindQuestion()æ–¹æ³•
+	 * @param åŒ…å«äº†æ‰€æœ‰å¯èƒ½æŸ¥è¯¢éœ€è¦çš„è¦æ±‚å‚æ•°
+	 * @return è¿”å›æ‰€æœ‰ç¬¦åˆæŸ¥è¯¢è¦æ±‚çš„é¢˜ç›®é›†åˆ
+	 * @throws Exception  IQuestionDAOæ¥å£ä¸­çš„å¼‚å¸¸
 	 */
 	public List<Question> queryQuestionByTitle(String mainTitle, String subTitle)throws Exception;
 	public List<Question> queryQuestionByTitleAndAttribute(String mainTitle, String subTitle, Integer difficulty, Boolean isMulti)throws Exception;
 	public List<Question> queryQuestionByTitleAndDifficulty(String mainTitle, String subTitle, Integer difficulty)throws Exception;
 	public List<Question> queryQuestionByTitleAndIsMulti(String mainTitle, String subTitle, Boolean isMulti)throws Exception;
 	/*
-	 * Í¨¹ı±êÌâºÍÌâ¸É£¬ÕÒµ½Î¨Ò»È·¶¨Ò»µÀÌâÄ¿·½·¨
+	 * é€šè¿‡æ ‡é¢˜å’Œé¢˜å¹²ï¼Œæ‰¾åˆ°å”¯ä¸€ç¡®å®šä¸€é“é¢˜ç›®æ–¹æ³•
 	 */
 	public Question queryQuestionByTitleAndContent(String mainTitle, String subTitle, String content)throws Exception;
 	/*
-	 * Í¨¹ıIDÕÒµ½Î¨Ò»Ò»µÀÌâÄ¿·½·¨Î¨Ò»
+	 * é€šè¿‡IDæ‰¾åˆ°å”¯ä¸€ä¸€é“é¢˜ç›®æ–¹æ³•å”¯ä¸€
 	 */
 	public Question queryQuestionById(Integer id)throws Exception;
 }

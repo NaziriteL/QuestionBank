@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class QuestionIndex
  */
-@WebServlet(description = "·µ»ØÌâ¿âËùÓĞÕÂ½Ú±êÌâÄ¿Â¼", urlPatterns = { "/question/index" })
+@WebServlet(description = "è¿”å›é¢˜åº“æ‰€æœ‰ç« èŠ‚æ ‡é¢˜ç›®å½•", urlPatterns = { "/question/index" })
 public class QuestionIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Download
  */
-@WebServlet(description = "负责试题文件下载服务", urlPatterns = { "/paperDownload" })
+@WebServlet(description = "璐熻矗璇曢鏂囦欢涓嬭浇鏈嶅姟", urlPatterns = { "/paperDownload" })
 public class Download extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

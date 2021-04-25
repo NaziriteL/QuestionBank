@@ -5,23 +5,23 @@ import com.javaweb.vo.User;
 
 public interface IUserService {
 	/*
-	 * ÓÃ»§µÇÂ½·½·¨
+	 * ç”¨æˆ·ç™»é™†æ–¹æ³•
 	 */
 	public boolean[] login(String username,String password) throws Exception;
 	/*
-	 * ÓÃ»§×¢²á·½·¨
+	 * ç”¨æˆ·æ³¨å†Œæ–¹æ³•
 	 */
 	public boolean register(User vo) throws Exception;
 	/*
-	 * »ñÈ¡ËùÓĞÓÃ»§ÁĞ±í·½·¨
+	 * è·å–æ‰€æœ‰ç”¨æˆ·åˆ—è¡¨æ–¹æ³•
 	 */
 	public List<User> getUserIndex() throws Exception;
 	/*
-	 * ĞŞ¸ÄÓÃ»§ĞÅÏ¢·½·¨
+	 * ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯æ–¹æ³•
 	 */
 	public boolean alterUserInfo(User vo) throws Exception;
 	/*
-	 * É¾³ıÓÃ»§ĞÅÏ¢·½·¨
+	 * åˆ é™¤ç”¨æˆ·ä¿¡æ¯æ–¹æ³•
 	 */
 	public boolean deleteUserInfo(String username) throws Exception;
 
