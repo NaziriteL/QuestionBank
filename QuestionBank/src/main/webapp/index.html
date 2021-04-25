@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+ 
+    <title>Signin Template for Bootstrap</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- Bootstrap core CSS -->
+ 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+ 
+    <!-- Custom styles for this template -->
+
+ 
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+ 
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+ 
+    <![endif]-->
+  </head>
+ 
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+  //alert(JSON.stringify(GetJsonData()))
+   $.ajax({   
+   contentType: 'application/json',
+  type: 'POST',
+  url: "login",
+   dataType: "json",
+  data: JSON.stringify(GetJsonData()),
+   success: function (message) {
+	   console.log(message);
+	   alert("提交数据成功！888"+message);
+        
+        },
+  error: function (message) {
+           console.log(message);
+			alert("提交数据失败！888"+message);
+			
+        }
+});
+ 
+});
+function GetJsonData() {
+    var json = {	
+    "username":$("#inputUsername").val(), 
+    "password":$("#inputPassword").val()
+    };
+    return json;
+}
+   
+});
+</script>
+<body>
+ 
+ 
+    <div class="container">
+ 
+      <form class="form-signin" >
+        <h2 class="form-signin-heading">Please sign in</h2>
+       
+        <input type="text" id="inputUsername" class="form-control" placeholder="username" required>
+       
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+       
+        <button class="btn btn-lg btn-primary btn-block" >Sign in</button>
+      </form>
+	  
+ 
+    </div> <!-- /container -->
+ 
+ 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  
+  
+    
+    
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    
+  </body>
+</html>

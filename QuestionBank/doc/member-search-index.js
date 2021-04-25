@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"com.javaweb.dao","c":"IQuestionDAO","l":"getAutoBlock(AutoBlock)","u":"getAutoBlock(com.javaweb.vo.AutoBlock)"}];updateSearchResults();
