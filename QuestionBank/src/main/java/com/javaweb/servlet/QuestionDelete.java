@@ -2,6 +2,11 @@ package com.javaweb.servlet;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.javaweb.factory.ServiceFactory;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -48,8 +53,20 @@ public class QuestionDelete extends HttpServlet {
 			respInt = insr.read();
 		}
 		//System.out.println(result);	
-		response.setCharacterEncoding("UTF-8");
-		response.setHeader("content-type", "text/html;charset=UTF-8");
+		JSONObject jsonId = JSON.parseObject(result);
+		Integer id = jsonId.getInteger("id");
+		
+		JSONObject object = new JSONObject()
+;		try {
+			object.put("result", ServiceFactory.getIQuestionOperateInstance().deleteQuestion(id));
+			response.getWriter().write(String.valueOf(object));
+			response.getWriter().close();
+		} catch (Exception e) {
+			object.put("result", false);
+			response.getWriter().write(String.valueOf(object));
+			response.getWriter().close();
+			e.printStackTrace();
+		}
 	}
 }
 

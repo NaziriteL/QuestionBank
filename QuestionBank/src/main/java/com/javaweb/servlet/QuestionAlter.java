@@ -2,6 +2,12 @@ package com.javaweb.servlet;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.javaweb.factory.ServiceFactory;
+import com.javaweb.vo.Question;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -47,7 +53,17 @@ public class QuestionAlter extends HttpServlet {
 			respInt = insr.read();
 		}
 		//System.out.println(result);	
-		response.setCharacterEncoding("UTF-8");
-		response.setHeader("content-type", "text/html;charset=UTF-8");
+		Question vo = JSON.parseObject(result, Question.class);
+		JSONObject out = new JSONObject();
+		try {
+			out.put("result", ServiceFactory.getIQuestionOperateInstance().alterQuestion(vo));
+			response.getWriter().write(String.valueOf(out));
+			response.getWriter().close();
+		} catch (Exception e) {
+			out.put("result", false);
+			response.getWriter().write(String.valueOf(out));
+			response.getWriter().close();
+			e.printStackTrace();
+		}
 	}
 }

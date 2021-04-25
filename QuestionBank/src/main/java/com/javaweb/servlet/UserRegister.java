@@ -50,16 +50,15 @@ public class UserRegister extends HttpServlet {
 			respInt = insr.read();
 		}
 		
-		JSONObject object = new JSONObject();
 		User user = JSON.parseObject(result, User.class);
-		
+		JSONObject out = new JSONObject();		
 		try {
-			object.put("result", ServiceFactory.getIUserServiceInstance().register(user));
-			response.getWriter().write(String.valueOf(object));
+			out.put("result", ServiceFactory.getIUserServiceInstance().register(user));
+			response.getWriter().write(String.valueOf(out));
 			response.getWriter().close();
 		} catch (Exception e) {
-			object.put("result", false);
-			response.getWriter().write(String.valueOf(object));
+			out.put("result", false);
+			response.getWriter().write(String.valueOf(out));
 			response.getWriter().close();
 			e.printStackTrace();
 		}

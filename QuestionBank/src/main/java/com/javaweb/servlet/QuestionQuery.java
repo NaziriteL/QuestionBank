@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import com.javaweb.factory.ServiceFactory;
 import com.javaweb.service.IQuestionOperate;
+import com.javaweb.vo.ObjectListTemplate;
 import com.javaweb.vo.Question;
 
 /**
@@ -54,7 +55,8 @@ public class QuestionQuery extends HttpServlet {
 		//System.out.println(result);
 		QuestionService qs = JSON.parseObject(result,QuestionService.class);
 		IQuestionOperate qo = ServiceFactory.getIQuestionOperateInstance();
-		QuestionList out = new QuestionList();
+		ObjectListTemplate<Question> out = new ObjectListTemplate<Question>();
+		List<Question> list = new ArrayList<Question>();
 		/*
 		 * 查找服务种类，代表含义：
 		 * 0:通过ID查找
@@ -67,7 +69,7 @@ public class QuestionQuery extends HttpServlet {
 		switch(qs.getServiceType()) {
 		case 0:
 			try {
-				out.getList().add(qo.queryQuestionById(Integer.parseInt(qs.getQueryParameter()[0])));
+				list.add(qo.queryQuestionById(Integer.parseInt(qs.getQueryParameter()[0])));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -75,13 +77,13 @@ public class QuestionQuery extends HttpServlet {
 			} break;
 		case 1:
 			try {
-				out.getList().addAll(qo.queryQuestionByTitle(qs.getQueryParameter()[0], qs.getQueryParameter()[1]));
+				list.addAll(qo.queryQuestionByTitle(qs.getQueryParameter()[0], qs.getQueryParameter()[1]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			} break;
 		case 2:
 			try {
-				out.getList().addAll(qo.queryQuestionByTitleAndAttribute(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Integer.parseInt(qs.getQueryParameter()[2]), Boolean.parseBoolean(qs.getQueryParameter()[3])));
+				list.addAll(qo.queryQuestionByTitleAndAttribute(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Integer.parseInt(qs.getQueryParameter()[2]), Boolean.parseBoolean(qs.getQueryParameter()[3])));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -89,7 +91,7 @@ public class QuestionQuery extends HttpServlet {
 			} break;
 		case 3:
 			try {
-				out.getList().addAll(qo.queryQuestionByTitleAndDifficulty(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Integer.parseInt(qs.getQueryParameter()[2])));
+				list.addAll(qo.queryQuestionByTitleAndDifficulty(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Integer.parseInt(qs.getQueryParameter()[2])));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -97,17 +99,18 @@ public class QuestionQuery extends HttpServlet {
 			} break;
 		case 4:
 			try {
-				out.getList().addAll(qo.queryQuestionByTitleAndIsMulti(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Boolean.parseBoolean(qs.getQueryParameter()[3])));
+				list.addAll(qo.queryQuestionByTitleAndIsMulti(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Boolean.parseBoolean(qs.getQueryParameter()[3])));
 			} catch (Exception e) {
 				e.printStackTrace();
 			} break;
 		case 5:
 			try {
-				out.getList().add(qo.queryQuestionByTitleAndContent(qs.getQueryParameter()[0], qs.getQueryParameter()[1], qs.getQueryParameter()[2]));
+				list.add(qo.queryQuestionByTitleAndContent(qs.getQueryParameter()[0], qs.getQueryParameter()[1], qs.getQueryParameter()[2]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			} break;
 		}
+		out.setIndex(list);
 		response.getWriter().write(JSON.toJSONString(out));
 		response.getWriter().close();
 	}
@@ -130,14 +133,4 @@ class QuestionService{
 		QueryParameter = queryParameter;
 	}
 	
-}
-
-class QuestionList{
-	List<Question> list;
-	public List<Question> getList() {
-		return list;
-	}
-	public void setList(List<Question> list) {
-		this.list = list;
-	}
 }

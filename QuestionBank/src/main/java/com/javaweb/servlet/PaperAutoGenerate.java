@@ -2,10 +2,10 @@ package com.javaweb.servlet;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 import com.javaweb.factory.ServiceFactory;
 import com.javaweb.vo.AutoPaper;
+import com.javaweb.vo.ObjectListTemplate;
 import com.javaweb.vo.QuestionPrint;
 
 import jakarta.servlet.ServletException;
@@ -57,32 +57,18 @@ public class PaperAutoGenerate extends HttpServlet {
 		AutoPaper ap = JSON.parseObject(result,AutoPaper.class);
 		
 		//保存题目集合
-		QuestionPrintTemplate out = new QuestionPrintTemplate();
+		ObjectListTemplate<QuestionPrint> out = new ObjectListTemplate<QuestionPrint>();
 		try {	
-			out.setPaper(ServiceFactory.getIPaperGenerateInstance().getAutoPaper(ap));
+			out.setIndex(ServiceFactory.getIPaperGenerateInstance().getAutoPaper(ap));
 		} catch (Exception e) {
-			response.sendRedirect("404.html");
 			// TODO Auto-generated catch block
-			//出错时设置空值
-			out.setPaper(null);
 			e.printStackTrace();
 		}
-		
-		if(!ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getPaper())) {
+		if(!ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getIndex())) {
 			//未生成时设置空值
-			out.setPaper(null);
+			out.setIndex(null);
 		}
 		response.getWriter().write(JSON.toJSONString(out));
 		response.getWriter().close();
-	}
-}
-
-class QuestionPrintTemplate{
-	List<QuestionPrint> Paper;
-	public List<QuestionPrint> getPaper() {
-		return Paper;
-	}
-	public void setPaper(List<QuestionPrint> paper) {
-		Paper = paper;
 	}
 }

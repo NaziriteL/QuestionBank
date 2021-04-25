@@ -1,10 +1,9 @@
 package com.javaweb.servlet;
 
 import java.io.IOException;
-import java.util.List;
-
 import com.alibaba.fastjson.JSON;
 import com.javaweb.factory.ServiceFactory;
+import com.javaweb.vo.ObjectListTemplate;
 import com.javaweb.vo.User;
 
 import jakarta.servlet.ServletException;
@@ -43,10 +42,10 @@ public class UserIndex extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		IndexTemplate out = new IndexTemplate();
+		ObjectListTemplate<User> out = new ObjectListTemplate<User>();
 		
 		try {
-			out.getIndex().addAll(ServiceFactory.getIUserServiceInstance().getUserIndex());
+			out.setIndex((ServiceFactory.getIUserServiceInstance().getUserIndex()));
 			response.getWriter().write(JSON.toJSONString(out));
 			response.getWriter().close();
 		} catch (Exception e) {
@@ -55,14 +54,4 @@ public class UserIndex extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-}
-
-class IndexTemplate{
-	private List<User> index;
-	public List<User> getIndex() {
-		return index;
-	}
-	public void setIndex(List<User> index) {
-		this.index = index;
-	}	
 }

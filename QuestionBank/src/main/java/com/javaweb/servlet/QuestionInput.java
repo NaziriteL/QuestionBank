@@ -2,11 +2,11 @@ package com.javaweb.servlet;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.javaweb.factory.ServiceFactory;
+import com.javaweb.vo.ObjectListTemplate;
 import com.javaweb.vo.Question;
 
 import jakarta.servlet.ServletException;
@@ -55,20 +55,15 @@ public class QuestionInput extends HttpServlet {
 			respInt = insr.read();
 		}
 		//System.out.println(result);	
-		QuestionTemplate out = JSON.parseObject(result, QuestionTemplate.class);
+		ObjectListTemplate<Question> out = JSON.parseObject(result, InputQuestionList.class);
 		JSONObject object = new JSONObject();
 		
 		try {
-			if(ServiceFactory.getIQuestionOperateInstance().inputQuestion(out.getQuestionList())) {
-				object.put("result", true);
-				
-			} else {
-				object.put("result", false);
-			}
+			object.put("result", ServiceFactory.getIQuestionOperateInstance().inputQuestion(out.getIndex()));
 			response.getWriter().write(String.valueOf(object));				
 			response.getWriter().close();
 		} catch (Exception e) {
-			object.put("result", true);
+			object.put("result", false);
 			response.getWriter().write(String.valueOf(object));				
 			response.getWriter().close();
 			e.printStackTrace();
@@ -76,13 +71,5 @@ public class QuestionInput extends HttpServlet {
 	}
 }
 
-class QuestionTemplate{
-	private List<Question> QuestionList;
-	public List<Question> getQuestionList() {
-		return QuestionList;
-	}
-
-	public void setQuestionList(List<Question> questionList) {
-		QuestionList = questionList;
-	}
+class InputQuestionList extends ObjectListTemplate<Question>{
 }

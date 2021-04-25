@@ -1,7 +1,10 @@
 package com.javaweb.servlet;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
+import com.alibaba.fastjson.JSON;
+import com.javaweb.factory.ServiceFactory;
+import com.javaweb.vo.ObjectListTemplate;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -39,16 +42,15 @@ public class QuestionIndex extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
-		//¶ÁÈ¡Á÷
-		InputStreamReader insr = new InputStreamReader(request.getInputStream(), "utf-8");
-		String result = "";
-		int respInt = insr.read();
-		while (respInt != -1) {
-			result += (char) respInt;
-			respInt = insr.read();
+		ObjectListTemplate<String[]> out = new ObjectListTemplate<String[]>();
+		try {
+			out.setIndex(ServiceFactory.getIQuestionOperateInstance().getQuestionIndex());
+			response.getWriter().write(JSON.toJSONString(out));
+			response.getWriter().close();
+		} catch (Exception e) {
+			response.getWriter().write(JSON.toJSONString(out));
+			response.getWriter().close();
+			e.printStackTrace();
 		}
-		//System.out.println(result);	
-		response.setCharacterEncoding("UTF-8");
-		response.setHeader("content-type", "text/html;charset=UTF-8");
 	}
 }

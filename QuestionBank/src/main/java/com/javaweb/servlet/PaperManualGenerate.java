@@ -3,7 +3,10 @@ package com.javaweb.servlet;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.alibaba.fastjson.JSON;
 import com.javaweb.factory.ServiceFactory;
+import com.javaweb.vo.ObjectListTemplate;
+import com.javaweb.vo.QuestionPrint;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,9 +50,24 @@ public class PaperManualGenerate extends HttpServlet {
 			result +=(char)respInt;
 			respInt = insr.read();
 		}
+		ObjectListTemplate<Integer>  ids = JSON.parseObject(result,InputIdList.class);
 		
-		
-		//ServiceFactory.getIPaperGenerateInstance().getManualPaper(ids);
+		//保存题目集合
+		ObjectListTemplate<QuestionPrint> out = new ObjectListTemplate<QuestionPrint>();
+		try {
+			out.setIndex(ServiceFactory.getIPaperGenerateInstance().getManualPaper(ids.getIndex()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(!ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getIndex())) {
+			//未生成时设置空值
+			out.setIndex(null);
+		}
+		response.getWriter().write(JSON.toJSONString(out));
+		response.getWriter().close();
 	}
+}
 
+class InputIdList extends ObjectListTemplate<Integer>{
 }
