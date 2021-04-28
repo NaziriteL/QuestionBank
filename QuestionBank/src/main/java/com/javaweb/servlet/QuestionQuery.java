@@ -53,7 +53,7 @@ public class QuestionQuery extends HttpServlet {
 			respInt = insr.read();
 		}
 		//System.out.println(result);
-		QuestionService qs = JSON.parseObject(result,QuestionService.class);
+		QuestionQueryService qs = JSON.parseObject(result,QuestionQueryService.class);
 		IQuestionOperate qo = ServiceFactory.getIQuestionOperateInstance();
 		ObjectListTemplate<Question> out = new ObjectListTemplate<Question>();
 		List<Question> list = new ArrayList<Question>();
@@ -117,7 +117,7 @@ public class QuestionQuery extends HttpServlet {
 
 }
 
-class QuestionService{
+class QuestionQueryService{
 	Integer ServiceType;
 	String[] QueryParameter;
 	public Integer getServiceType() {

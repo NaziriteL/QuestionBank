@@ -6,11 +6,11 @@ public class AutoPaper implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer blockAmount;
 	private AutoBlock[] blocks;
-	public Integer getBlockAmont() {
+	public Integer getBlockAmount() {
 		return blockAmount;
 	}
-	public void setBlockAmont(Integer blockAmont) {
-		this.blockAmount = blockAmont;
+	public void setBlockAmount(Integer blockAmuont) {
+		this.blockAmount = blockAmuont;
 	}
 	public AutoBlock[] getBlocks() {
 		return blocks;

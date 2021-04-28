@@ -52,7 +52,7 @@ public class PaperAutoGenerate extends HttpServlet {
 			result +=(char)respInt;
 			respInt = insr.read();
 		}
-		System.out.println(result);
+		//System.out.println(result);
 		
 		AutoPaper ap = JSON.parseObject(result,AutoPaper.class);
 		
@@ -61,7 +61,7 @@ public class PaperAutoGenerate extends HttpServlet {
 		try {	
 			out.setIndex(ServiceFactory.getIPaperGenerateInstance().getAutoPaper(ap));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			out.setIndex(null);
 			e.printStackTrace();
 		}
 		if(!ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getIndex())) {

@@ -19,7 +19,7 @@ public interface IQuestionDAO extends IDAO<Question,Integer>{
 	/*
 	 * 
 	 */
-	public List<QuestionPrint> getManualPaperQuestion(List<Integer> ids);
+	public List<QuestionPrint> getManualPaperQuestion(List<Integer> ids) throws Exception;
 	/*
 	 * 
 	 */

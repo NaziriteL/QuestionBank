@@ -58,7 +58,7 @@ public class UserDAOImpl implements IUserDAO {
 	@Override
 	public boolean doCreate(User vo) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO users(username, password, isMulti) VALUES(?,?,?)";
+		String sql = "INSERT INTO users(username, password, isAdmin) VALUES(?,?,?)";
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, vo.getUsername());
 		this.pstmt.setString(2, vo.getPassword());

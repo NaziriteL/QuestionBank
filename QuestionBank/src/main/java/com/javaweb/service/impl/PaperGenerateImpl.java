@@ -14,7 +14,7 @@ public class PaperGenerateImpl implements IPaperGenerate {
 	@Override
 	public List<QuestionPrint> getAutoPaper(AutoPaper ap) throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = ap.getBlockAmont();
+		int cnt = ap.getBlockAmount();
 		List<QuestionPrint> res = new ArrayList<QuestionPrint>();
 		try {
 			for(int i = 0; i < cnt; i++) {
@@ -32,7 +32,7 @@ public class PaperGenerateImpl implements IPaperGenerate {
 	}
 	
 	@Override
-	public List<QuestionPrint> getManualPaper(List<Integer> ids) throws Exception {
+	public List<QuestionPrint> getManualPaper(List<Integer> ids) throws Exception{
 		// TODO Auto-generated method stub
 		try {
 			return DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).getManualPaperQuestion(ids);

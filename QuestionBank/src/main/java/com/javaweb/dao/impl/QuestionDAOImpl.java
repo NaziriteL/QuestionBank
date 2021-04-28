@@ -26,51 +26,180 @@ public class QuestionDAOImpl implements IQuestionDAO {
 	@Override
 	public List<QuestionPrint> getAutoBlockByRequest(AutoBlock vo) throws Exception{
 		// TODO Auto-generated method stub
+		int maxId;
+		int minId;
 		List<QuestionPrint> res = new ArrayList<QuestionPrint>();
-		String sql = "SELECT COUNT(*) FROM question_bank WHERE mainTitle = ? AND "
-				+"subTitle = ? AND difficulty = ? AND isMulti = ?";
-		this.pstmt = this.conn.prepareStatement(sql);
-		this.pstmt.setString(1, vo.getMainTitle());
-		this.pstmt.setString(2, vo.getSubTitle());
-		this.pstmt.setInt(3, vo.getDifficulty());
-		this.pstmt.setInt(4, vo.getIsMulti().booleanValue() ? 1 : 0);
-		ResultSet rs = this.pstmt.executeQuery();
-		if(rs.getInt("count(*)") < vo.getQuestionAmount()) {
-			return null;
+		if(vo.getSubTitle() != null) {		
+			String sql = "SELECT COUNT(*) FROM question_bank WHERE mainTitle = ? AND "
+					+"subTitle = ? AND difficulty = ? AND isMulti = ?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setString(2, vo.getSubTitle());
+			this.pstmt.setInt(3, vo.getDifficulty());
+			this.pstmt.setInt(4, vo.getIsMulti().booleanValue() ? 1 : 0);
+			ResultSet rs = this.pstmt.executeQuery();
+			if(!rs.next()) {
+				return null;
+			}
+			if(rs.getInt("count(*)") < vo.getQuestionAmount()) {
+				return null;
+			}
+			
+			sql = "SELECT MAX(id) FROM (SELECT id, content, options, answer FROM question_bank "
+					+"WHERE mainTitle = ? AND subTitle = ? AND difficulty = ? AND isMulti = ?) as t1";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setString(2, vo.getSubTitle());
+			this.pstmt.setInt(3, vo.getDifficulty());
+			this.pstmt.setInt(4, vo.getIsMulti().booleanValue() ? 1 : 0);
+			rs = this.pstmt.executeQuery();
+			if(rs.next()) {
+				maxId = rs.getInt(1);
+			} else {
+				return null;
+			}
+			
+			sql = "SELECT MIN(id) FROM (SELECT id, content, options, answer FROM question_bank "
+					+"WHERE mainTitle = ? AND subTitle = ? AND difficulty = ? AND isMulti = ?) as t1";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setString(2, vo.getSubTitle());
+			this.pstmt.setInt(3, vo.getDifficulty());
+			this.pstmt.setInt(4, vo.getIsMulti().booleanValue() ? 1 : 0);
+			rs = this.pstmt.executeQuery();
+			if(rs.next()) {
+				minId = rs.getInt(1);
+			} else {
+				return null;
+			}
+			
+			sql = "SELECT * FROM (SELECT id, content, options, answer FROM question_bank "
+					+"WHERE mainTitle = ? AND subTitle = ? AND difficulty = ? AND isMulti = ?) AS t1 JOIN "
+					+"(SELECT ROUND(RAND() * (? - ?) + ?) AS id) AS t2 "
+					+"WHERE t1.id >= t2.id ORDER BY t1.id LIMIT 1";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setString(2, vo.getSubTitle());
+			this.pstmt.setInt(3, vo.getDifficulty());
+			this.pstmt.setInt(4, vo.getIsMulti().booleanValue() ? 1 : 0);
+			this.pstmt.setInt(5, maxId);
+			this.pstmt.setInt(6, minId);
+			this.pstmt.setInt(7, minId);
+			
+			int amount = 0;
+			List<String> ctt = new ArrayList<String>();
+			while(amount < vo.getQuestionAmount()) {
+				rs = this.pstmt.executeQuery();
+				if(!rs.next()) {
+					continue;
+				}
+				if(ctt.contains(rs.getString(3))) {
+					continue;
+				}
+				QuestionPrint qv =new QuestionPrint();
+				qv.setContent(rs.getString(2));
+				ctt.add(rs.getString(2));
+				qv.setOptions(rs.getString(3).split("---"));
+				qv.setAnswer(rs.getInt(4));
+				res.add(qv);
+				amount++;
+			}	
+			return res;
+		} else {
+			String sql = "SELECT COUNT(*) FROM question_bank WHERE mainTitle = ? AND "
+					+"difficulty = ? AND isMulti = ?";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setInt(2, vo.getDifficulty());
+			this.pstmt.setInt(3, vo.getIsMulti().booleanValue() ? 1 : 0);
+			ResultSet rs = this.pstmt.executeQuery();
+			if(!rs.next()) {
+				return null;
+			}
+			if(rs.getInt("count(*)") < vo.getQuestionAmount()) {
+				return null;
+			}
+			
+			sql = "SELECT MAX(id) FROM (SELECT id, content, options, answer FROM question_bank "
+					+"WHERE mainTitle = ? AND difficulty = ? AND isMulti = ?) as t1";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setInt(2, vo.getDifficulty());
+			this.pstmt.setInt(3, vo.getIsMulti().booleanValue() ? 1 : 0);
+			rs = this.pstmt.executeQuery();
+			if(rs.next()) {
+				maxId = rs.getInt(1);
+			} else {
+				return null;
+			}
+			
+			sql = "SELECT MIN(id) FROM (SELECT id, content, options, answer FROM question_bank "
+					+"WHERE mainTitle = ? AND difficulty = ? AND isMulti = ?) as t1";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setInt(2, vo.getDifficulty());
+			this.pstmt.setInt(3, vo.getIsMulti().booleanValue() ? 1 : 0);
+			rs = this.pstmt.executeQuery();
+			if(rs.next()) {
+				minId = rs.getInt(1);
+			} else {
+				return null;
+			}
+			
+			sql = "SELECT * FROM (SELECT id, content, options, answer FROM question_bank "
+					+"WHERE mainTitle = ? AND difficulty = ? AND isMulti = ?) AS t1 JOIN "
+					+"(SELECT ROUND(RAND() * (? - ?) + ?) AS id) AS t2 "
+					+"WHERE t1.id >= t2.id ORDER BY t1.id LIMIT 1";
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setString(1, vo.getMainTitle());
+			this.pstmt.setInt(2, vo.getDifficulty());
+			this.pstmt.setInt(3, vo.getIsMulti().booleanValue() ? 1 : 0);
+			this.pstmt.setInt(4, maxId);
+			this.pstmt.setInt(5, minId);
+			this.pstmt.setInt(6, minId);
+			
+			int amount = 0;
+			List<String> ctt = new ArrayList<String>();
+			while(amount < vo.getQuestionAmount()) {
+				rs = this.pstmt.executeQuery();
+				if(!rs.next()) {
+					continue;
+				}
+				if(ctt.contains(rs.getString(3))) {
+					continue;
+				}
+				QuestionPrint qv =new QuestionPrint();
+				qv.setContent(rs.getString(2));
+				ctt.add(rs.getString(2));
+				qv.setOptions(rs.getString(3).split("---"));
+				qv.setAnswer(rs.getInt(4));
+				res.add(qv);
+				amount++;
+			}	
+			return res;
 		}
 		
-		sql = "SELECT * FROM (SELECT DISTINCT id, content, options, answer FROM question_bank "
-				+"WHERE mainTitle = ? AND subTitle = ? AND difficulty = ? AND isMulti = ?) AS t1 JOIN "
-				+"(SELECT ROUND(RAND() * ((SELECT MAX(id) FROM t1) - (SELECT MIN(id) FROM t1)) + "
-				+"(SELECT MIN(id) FROM t1)) AS id) AS t2 WHERE t1.id >= t2.id ORDER BY t1.id LIMIT 1";
-		this.pstmt = this.conn.prepareStatement(sql);
-		this.pstmt.setString(1, vo.getMainTitle());
-		this.pstmt.setString(2, vo.getSubTitle());
-		this.pstmt.setInt(3, vo.getDifficulty());
-		this.pstmt.setInt(4, vo.getIsMulti().booleanValue() ? 1 : 0);
-		
-		int amount = 0;
-		List<String> ctt = new ArrayList<String>();
-		while(amount < vo.getQuestionAmount()) {
-			rs = this.pstmt.executeQuery();
-			if(ctt.contains(rs.getString(3))) {
-				continue;
-			}
-			QuestionPrint qv =new QuestionPrint();
-			qv.setContent(rs.getString(2));
-			ctt.add(rs.getString(2));
-			qv.setOptions(rs.getString(3).split("---"));
-			qv.setAnswer(rs.getInt(4));
-			res.add(qv);
-			amount++;
-		}	
-		return res;
 	}
 	
 	@Override
-	public List<QuestionPrint> getManualPaperQuestion(List<Integer> ids) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QuestionPrint> getManualPaperQuestion(List<Integer> ids) throws Exception {
+		String sql ="SELECT content, options, answer FROM question_bank WHERE id = ?";
+		ResultSet rs;
+		List<QuestionPrint> res = new ArrayList<QuestionPrint>();
+		for(Integer id : ids) {
+			this.pstmt = this.conn.prepareStatement(sql);
+			this.pstmt.setInt(1, id);
+			rs = this.pstmt.executeQuery();
+			if(!rs.next()) {
+				return null;
+			}
+			QuestionPrint qv =new QuestionPrint();
+			qv.setContent(rs.getString(1));
+			qv.setOptions(rs.getString(2).split("---"));
+			qv.setAnswer(rs.getInt(3));
+			res.add(qv);
+		}
+		return res;
 	}
 
 	@Override

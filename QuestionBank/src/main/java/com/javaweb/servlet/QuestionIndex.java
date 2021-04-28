@@ -1,6 +1,9 @@
 package com.javaweb.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.alibaba.fastjson.JSON;
 import com.javaweb.factory.ServiceFactory;
 import com.javaweb.vo.ObjectListTemplate;
@@ -42,9 +45,29 @@ public class QuestionIndex extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
-		ObjectListTemplate<String[]> out = new ObjectListTemplate<String[]>();
+		ObjectListTemplate<TitleBlock> out = new ObjectListTemplate<TitleBlock>();
+		List<TitleBlock> titleIndex = new ArrayList<TitleBlock>();
+		TitleBlock tb = new TitleBlock();
 		try {
-			out.setIndex(ServiceFactory.getIQuestionOperateInstance().getQuestionIndex());
+			List<String[]> res = ServiceFactory.getIQuestionOperateInstance().getQuestionIndex();
+			String beforeMainTitle = res.get(0)[0];
+			List<String> subTitleIndex = new ArrayList<String>();
+			for(String[] i : res) {
+				if(i[0].equals(beforeMainTitle)) {
+					subTitleIndex.add(i[1]);
+				} else {
+					tb.setMainTitle(beforeMainTitle);
+					tb.setSubTitle(subTitleIndex);
+					beforeMainTitle = i[0];
+					subTitleIndex.clear();
+					titleIndex.add(tb);
+					subTitleIndex.add(i[1]);
+				}	
+			}
+			tb.setMainTitle(beforeMainTitle);
+			tb.setSubTitle(subTitleIndex);
+			titleIndex.add(tb);
+			out.setIndex(titleIndex);
 			response.getWriter().write(JSON.toJSONString(out));
 			response.getWriter().close();
 		} catch (Exception e) {
@@ -53,4 +76,21 @@ public class QuestionIndex extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+}
+
+class TitleBlock{
+	private String mainTitle;
+	private List<String> subTitle;
+	public String getMainTitle() {
+		return mainTitle;
+	}
+	public void setMainTitle(String mainTitle) {
+		this.mainTitle = mainTitle;
+	}
+	public List<String> getSubTitle() {
+		return subTitle;
+	}
+	public void setSubTitle(List<String> subTitle) {
+		this.subTitle = subTitle;
+	}	
 }

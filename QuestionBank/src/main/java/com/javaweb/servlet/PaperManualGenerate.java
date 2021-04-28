@@ -56,8 +56,9 @@ public class PaperManualGenerate extends HttpServlet {
 		ObjectListTemplate<QuestionPrint> out = new ObjectListTemplate<QuestionPrint>();
 		try {
 			out.setIndex(ServiceFactory.getIPaperGenerateInstance().getManualPaper(ids.getIndex()));
+			System.out.println(out.getIndex().size());System.out.println(out.getIndex().get(2).getAnswer());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			out.setIndex(null);
 			e.printStackTrace();
 		}
 		if(!ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getIndex())) {
