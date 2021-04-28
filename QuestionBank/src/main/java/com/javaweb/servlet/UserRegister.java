@@ -43,14 +43,14 @@ public class UserRegister extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
-		String result = "";
+		StringBuilder result = new StringBuilder(40);
 		int respInt = insr.read();
-		while(respInt!=-1) {
-			result +=(char)respInt;
+		while(respInt != -1) {
+			result.append((char)respInt);
 			respInt = insr.read();
 		}
 		
-		User user = JSON.parseObject(result, User.class);
+		User user = JSON.parseObject(result.toString(), User.class);
 		JSONObject out = new JSONObject();		
 		try {
 			out.put("result", ServiceFactory.getIUserServiceInstance().register(user));

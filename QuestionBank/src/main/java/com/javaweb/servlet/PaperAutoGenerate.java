@@ -46,15 +46,15 @@ public class PaperAutoGenerate extends HttpServlet {
 		// TODO Auto-generated method stub
 		//读取流
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
-		String result = "";
+		StringBuilder result = new StringBuilder(40);
 		int respInt = insr.read();
-		while(respInt!=-1) {
-			result +=(char)respInt;
+		while(respInt != -1) {
+			result.append((char)respInt);
 			respInt = insr.read();
 		}
 		//System.out.println(result);
 		
-		AutoPaper ap = JSON.parseObject(result,AutoPaper.class);
+		AutoPaper ap = JSON.parseObject(result.toString(),AutoPaper.class);
 		
 		//保存题目集合
 		ObjectListTemplate<QuestionPrint> out = new ObjectListTemplate<QuestionPrint>();

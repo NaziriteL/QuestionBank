@@ -44,15 +44,15 @@ public class UserAlter extends HttpServlet {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
 		//读取流
-		InputStreamReader insr = new InputStreamReader(request.getInputStream(), "utf-8");
-		String result = "";
+		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
+		StringBuilder result = new StringBuilder(40);
 		int respInt = insr.read();
-		while (respInt != -1) {
-			result += (char) respInt;
+		while(respInt != -1) {
+			result.append((char)respInt);
 			respInt = insr.read();
 		}
 		//System.out.println(result);	
-		User user = JSON.parseObject(result, User.class);
+		User user = JSON.parseObject(result.toString(), User.class);
 		JSONObject object = new JSONObject();
 		try {
 			object.put("result", ServiceFactory.getIUserServiceInstance().alterUserInfo(user));

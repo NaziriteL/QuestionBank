@@ -45,15 +45,15 @@ public class QuestionInput extends HttpServlet {
 		// TODO Auto-generated method stub
 		//request.setCharacterEncoding("UTF-8");
 		//读取流
-		InputStreamReader insr = new InputStreamReader(request.getInputStream(), "utf-8");
-		String result = "";
+		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
+		StringBuilder result = new StringBuilder(100);
 		int respInt = insr.read();
-		while (respInt != -1) {
-			result += (char) respInt;
+		while(respInt != -1) {
+			result.append((char)respInt);
 			respInt = insr.read();
 		}
 		//System.out.println(result);	
-		ObjectListTemplate<Question> out = JSON.parseObject(result, InputQuestionList.class);
+		ObjectListTemplate<Question> out = JSON.parseObject(result.toString(), InputQuestionList.class);
 		JSONObject object = new JSONObject();
 		
 		try {

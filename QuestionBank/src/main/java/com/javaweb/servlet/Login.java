@@ -46,15 +46,15 @@ public class Login extends HttpServlet {
 		
 		//读取流
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
-		String result = "";
+		StringBuilder result = new StringBuilder(40);
 		int respInt = insr.read();
-		while(respInt!=-1) {
-			result +=(char)respInt;
+		while(respInt != -1) {
+			result.append((char)respInt);
 			respInt = insr.read();
 		}
-		System.out.println(result);
+		//System.out.println(result);
 					
-		JSONObject jsonUser = JSON.parseObject(result);
+		JSONObject jsonUser = JSON.parseObject(result.toString());
 		String username = jsonUser.getString("username");
 		String password = jsonUser.getString("password");
 		

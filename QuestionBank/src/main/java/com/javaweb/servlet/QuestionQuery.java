@@ -46,14 +46,14 @@ public class QuestionQuery extends HttpServlet {
 		// TODO Auto-generated method stub
 		//读取流
 		InputStreamReader insr = new InputStreamReader(request.getInputStream(),"utf-8");
-		String result = "";
+		StringBuilder result = new StringBuilder(40);
 		int respInt = insr.read();
-		while(respInt!=-1) {
-			result +=(char)respInt;
+		while(respInt != -1) {
+			result.append((char)respInt);
 			respInt = insr.read();
 		}
 		//System.out.println(result);
-		QuestionQueryService qs = JSON.parseObject(result,QuestionQueryService.class);
+		QuestionQueryService qs = JSON.parseObject(result.toString(),QuestionQueryService.class);
 		IQuestionOperate qo = ServiceFactory.getIQuestionOperateInstance();
 		ObjectListTemplate<Question> out = new ObjectListTemplate<Question>();
 		List<Question> list = new ArrayList<Question>();
