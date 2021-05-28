@@ -10,7 +10,7 @@ public class ServiceFactory {
 	public static IUserService getIUserServiceInstance() {
 		return new UserServiceImpl();
 	}
-	public static IPaperGenerate getIPaperGenerateInstance() {
+	public static IPaperGenerate getIPaperGenerateInstance() {                                                                                                                                                               
 		return new PaperGenerateImpl();
 	}
 	public static IQuestionOperate getIQuestionOperateInstance() {

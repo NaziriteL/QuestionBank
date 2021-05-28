@@ -42,7 +42,6 @@ public class CharSetAndLoginFilter implements Filter {
 				arg2.doFilter(request, response);	
 			}
 		}else{
-			//request.getRequestDispatcher("/download/2333.docx").forward(request,response);
 			response.sendRedirect(LOGIN_PAGE);		
 			return;
 		}

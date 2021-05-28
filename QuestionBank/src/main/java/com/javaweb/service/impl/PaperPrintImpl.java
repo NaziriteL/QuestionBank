@@ -19,7 +19,6 @@ public class PaperPrintImpl implements IPaperPrint {
 	private static final String[] ANSWER_MAP = new String[] 
 			{"D","C","CD","B","BD","BC","BCD","A","AD","AC","ACD","AB","ABD","ABD","ABCD"};
 	private static final String FILE = "D:\\Program\\apache-tomcat-10.0.4\\webapps\\QuestionBank\\download\\paper.docx";
-	
 	@Override
 	public boolean createPaperDocument(List<QuestionPrint> qps) {
 		// TODO Auto-generated method stub 	
@@ -32,7 +31,6 @@ public class PaperPrintImpl implements IPaperPrint {
         BufferedOutputStream bufferStream = null;
         try {
             File dirname = new File(FILE);
-            System.out.println(dirname.exists());
             if (!dirname.exists()) {
                 dirname.mkdirs();
             }
@@ -43,7 +41,6 @@ public class PaperPrintImpl implements IPaperPrint {
             XWPFParagraph p1 = document.createParagraph();
             // 设置居中
             p1.setAlignment(ParagraphAlignment.CENTER);
-            System.out.println(2);
             XWPFRun r1 = p1.createRun();
            // 是否加粗
             r1.setBold(true);

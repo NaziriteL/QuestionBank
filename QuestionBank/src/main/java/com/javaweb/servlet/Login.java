@@ -71,7 +71,6 @@ public class Login extends HttpServlet {
 		        	session.setAttribute("isAdmin",true);
 					response.getWriter().write(String.valueOf(object));				
 					response.getWriter().close();
-					//response.setHeader("Refresh", "5;url='QuestionBank/404.html'");
 				}else {
 					object.put("result","登陆成功，普通账号");
 					session.setAttribute("isAdmin",false);

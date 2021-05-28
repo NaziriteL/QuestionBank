@@ -24,7 +24,7 @@ public class QuestionDAOImpl implements IQuestionDAO {
 	}
 
 	@Override
-	public List<QuestionPrint> getAutoBlockByRequest(AutoBlock vo) throws Exception{
+	public List<QuestionPrint> getAutoBlockByRequest(AutoBlock vo, Integer i) throws Exception{
 		// TODO Auto-generated method stub
 		int maxId;
 		int minId;
@@ -42,7 +42,12 @@ public class QuestionDAOImpl implements IQuestionDAO {
 				return null;
 			}
 			if(rs.getInt("count(*)") < vo.getQuestionAmount()) {
-				return null;
+				QuestionPrint temp = new QuestionPrint();
+				temp.setContent(Integer.toString(rs.getInt("count(*)")));
+				temp.setAnswer(null);
+				temp.setAnswer(-i);
+				res.add(temp);
+				return res;
 			}
 			
 			sql = "SELECT MAX(id) FROM (SELECT id, content, options, answer FROM question_bank "
@@ -117,7 +122,12 @@ public class QuestionDAOImpl implements IQuestionDAO {
 				return null;
 			}
 			if(rs.getInt("count(*)") < vo.getQuestionAmount()) {
-				return null;
+				QuestionPrint temp = new QuestionPrint();
+				temp.setContent(Integer.toString(rs.getInt("count(*)")));
+				temp.setAnswer(null);
+				temp.setAnswer(-i);
+				res.add(temp);
+				return res;
 			}
 			
 			sql = "SELECT MAX(id) FROM (SELECT id, content, options, answer FROM question_bank "
@@ -363,8 +373,7 @@ public class QuestionDAOImpl implements IQuestionDAO {
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, vo.getMainTitle());
 		this.pstmt.setString(2, vo.getSubTitle());
-		this.pstmt.setInt(3, vo.getDifficulty());
-		this.pstmt.setInt(4, vo.getIsMulti().booleanValue() ? 1 : 0);
+		this.pstmt.setInt(3, vo.getIsMulti().booleanValue() ? 1 : 0);
 		ResultSet rs = this.pstmt.executeQuery();
 		while(rs.next()) {
 			Question q = new Question();
@@ -409,7 +418,7 @@ public class QuestionDAOImpl implements IQuestionDAO {
 	}
 	
 	@Override
-	public Question findQuestionByTitleAndConent(Question vo) throws Exception {
+	public Question findQuestionByTitleAndContent(Question vo) throws Exception {
 		// TODO Auto-generated method stub
 		Question res = new Question(); 
 		String sql = "SELECT id, mainTitle, subTitle, content, options, answer, difficulty, isMulti FROM question_bank "

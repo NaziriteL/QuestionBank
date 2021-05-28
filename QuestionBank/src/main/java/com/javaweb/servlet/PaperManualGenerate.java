@@ -50,13 +50,14 @@ public class PaperManualGenerate extends HttpServlet {
 			result.append((char)respInt);
 			respInt = insr.read();
 		}
+		//System.out.println(result);
 		ObjectListTemplate<Integer>  ids = JSON.parseObject(result.toString(),InputIdList.class);
 		
 		//保存题目集合
 		ObjectListTemplate<QuestionPrint> out = new ObjectListTemplate<QuestionPrint>();
 		try {
 			out.setIndex(ServiceFactory.getIPaperGenerateInstance().getManualPaper(ids.getIndex()));
-			System.out.println(out.getIndex().size());System.out.println(out.getIndex().get(2).getAnswer());
+			//System.out.println(out.getIndex().size());
 		} catch (Exception e) {
 			out.setIndex(null);
 			e.printStackTrace();

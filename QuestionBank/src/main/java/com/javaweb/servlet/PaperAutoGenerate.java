@@ -2,6 +2,8 @@ package com.javaweb.servlet;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.javaweb.factory.ServiceFactory;
 import com.javaweb.vo.AutoPaper;
@@ -52,10 +54,8 @@ public class PaperAutoGenerate extends HttpServlet {
 			result.append((char)respInt);
 			respInt = insr.read();
 		}
-		//System.out.println(result);
-		
-		AutoPaper ap = JSON.parseObject(result.toString(),AutoPaper.class);
-		
+		//System.out.println(result);		
+		AutoPaper ap = JSON.parseObject(result.toString(),AutoPaper.class);	
 		//保存题目集合
 		ObjectListTemplate<QuestionPrint> out = new ObjectListTemplate<QuestionPrint>();
 		try {	
@@ -64,9 +64,13 @@ public class PaperAutoGenerate extends HttpServlet {
 			out.setIndex(null);
 			e.printStackTrace();
 		}
-		if(!ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getIndex())) {
-			//未生成时设置空值
-			out.setIndex(null);
+		if(out.getIndex().get(0).getAnswer() > 0 && !ServiceFactory.getIPaperPrintInstance().createPaperDocument(out.getIndex())) {
+			//未生成时设置唯一元素的答案为10000
+			List<QuestionPrint> temp = new ArrayList<QuestionPrint>();
+			QuestionPrint a = new QuestionPrint();
+			a.setAnswer(10000);
+			temp.add(a);
+			out.setIndex(temp);
 		}
 		response.getWriter().write(JSON.toJSONString(out));
 		response.getWriter().close();

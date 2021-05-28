@@ -47,50 +47,54 @@ public class QuestionIndex extends HttpServlet {
 		//request.setCharacterEncoding("UTF-8");
 		ObjectListTemplate<TitleBlock> out = new ObjectListTemplate<TitleBlock>();
 		List<TitleBlock> titleIndex = new ArrayList<TitleBlock>();
-		TitleBlock tb = new TitleBlock();
+		
 		try {
 			List<String[]> res = ServiceFactory.getIQuestionOperateInstance().getQuestionIndex();
-			String beforeMainTitle = res.get(0)[0];
+			TitleBlock tb_last = new TitleBlock();
+			List<String> beforeMainTitle = new ArrayList<String>();
+			beforeMainTitle.add(res.get(0)[0]);
 			List<String> subTitleIndex = new ArrayList<String>();
+			int begin = 0, end = 0;
+			int cnt = 0;
 			for(String[] i : res) {
-				if(i[0].equals(beforeMainTitle)) {
-					subTitleIndex.add(i[1]);
-				} else {
-					tb.setMainTitle(beforeMainTitle);
-					tb.setSubTitle(subTitleIndex);
-					beforeMainTitle = i[0];
-					subTitleIndex.clear();
-					titleIndex.add(tb);
-					subTitleIndex.add(i[1]);
+				if(!i[0].equals(beforeMainTitle.get(cnt))) {	
+					TitleBlock tb = new TitleBlock();		
+					tb.setMainTitle(beforeMainTitle.get(cnt));
+					tb.setSubTitle(subTitleIndex.subList(begin, end).toArray(new String[subTitleIndex.subList(begin, end).size()]));
+					beforeMainTitle.add(i[0]);
+					titleIndex.add(tb);				
+					begin = end;
+					cnt++;
 				}	
+				subTitleIndex.add(i[1]);
+				end++;
 			}
-			tb.setMainTitle(beforeMainTitle);
-			tb.setSubTitle(subTitleIndex);
-			titleIndex.add(tb);
-			out.setIndex(titleIndex);
-			response.getWriter().write(JSON.toJSONString(out));
+			tb_last.setMainTitle(beforeMainTitle.get(cnt));
+			tb_last.setSubTitle(subTitleIndex.subList(begin, end).toArray(new String[subTitleIndex.subList(begin, end).size()]));
+			titleIndex.add(tb_last);
+			out.setIndex(null);
+			response.getWriter().write(JSON.toJSONString(titleIndex));
 			response.getWriter().close();
 		} catch (Exception e) {
-			response.getWriter().write(JSON.toJSONString(out));
+			response.getWriter().write("未知错误");
 			response.getWriter().close();
 			e.printStackTrace();
 		}
 	}
 }
-
 class TitleBlock{
 	private String mainTitle;
-	private List<String> subTitle;
+	private String[] subTitle;
 	public String getMainTitle() {
 		return mainTitle;
 	}
 	public void setMainTitle(String mainTitle) {
 		this.mainTitle = mainTitle;
 	}
-	public List<String> getSubTitle() {
+	public String[] getSubTitle() {
 		return subTitle;
 	}
-	public void setSubTitle(List<String> subTitle) {
+	public void setSubTitle(String[] subTitle) {
 		this.subTitle = subTitle;
 	}	
 }

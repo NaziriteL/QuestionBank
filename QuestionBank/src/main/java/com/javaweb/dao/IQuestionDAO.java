@@ -15,7 +15,7 @@ public interface IQuestionDAO extends IDAO<Question,Integer>{
 	 * @param return 如果数据能够满足试卷块要求，则返回一份试题块，否则返回null
 	 * @throws Exception 如果数据路没有连接，则出现NullPointerException,如果SQL语句错误则抛出SQLException
 	 */
-	public List<QuestionPrint> getAutoBlockByRequest(AutoBlock ab) throws Exception; 
+	public List<QuestionPrint> getAutoBlockByRequest(AutoBlock vo, Integer i) throws Exception; 
 	/*
 	 * 
 	 */
@@ -34,6 +34,6 @@ public interface IQuestionDAO extends IDAO<Question,Integer>{
 	public List<Question> findQuestionByTitleAndDifficulty(Question vo)throws Exception;
 	public List<Question> findQuestionByTitleAndIsMulti(Question vo)throws Exception;
 	public List<Question> findQuestionByTitleAndAttri(Question vo)throws Exception;
-	public Question findQuestionByTitleAndConent(Question vo)throws Exception;
+	public Question findQuestionByTitleAndContent(Question vo)throws Exception;
 	public Question findQuestionById(Integer id)throws Exception;
 }

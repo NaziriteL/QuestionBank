@@ -22,62 +22,10 @@
   	<filter-name>CharSetAndLoginFilter</filter-name>	<!-- 类名 这个名要跟上面的类名保持一致 -->
   	<url-pattern>/pages/*</url-pattern>	<!-- 这里的路径/*代表过滤所有页面 -->
   </filter-mapping>
-  
-  
-  <servlet>
-	<servlet-name>Login</servlet-name>
- 	<servlet-class>com.javaweb.servlet.Login</servlet-class>
-  </servlet> 
-  <servlet>
-	<servlet-name>UserRegister</servlet-name>
- 	<servlet-class>com.javaweb.servlet.UserRegister</servlet-class>
-  </servlet>
-  <servlet>
-	<servlet-name>UserIndex</servlet-name>
- 	<servlet-class>com.javaweb.servlet.Login</servlet-class>
-  </servlet> 
-  <servlet>
-	<servlet-name>UserAlter</servlet-name>
- 	<servlet-class>com.javaweb.servlet.UserAlter</servlet-class>
-  </servlet> 
-  <servlet>
-	<servlet-name>UserDelete</servlet-name>
- 	<servlet-class>com.javaweb.servlet.UserDelete</servlet-class>
-  </servlet> 
-  
-  <servlet>
-	<servlet-name>QuestionIndex</servlet-name>
- 	<servlet-class>com.javaweb.servlet.QuestionIndex</servlet-class>
-  </servlet>
-  <servlet>
-	<servlet-name>QuestionInput</servlet-name>
- 	<servlet-class>com.javaweb.servlet.QuestionInput</servlet-class>
-  </servlet>
-  <servlet>
-	<servlet-name>QuestionQuery</servlet-name>
- 	<servlet-class>com.javaweb.servlet.QuestionQuery</servlet-class>
-  </servlet>
-  <servlet>
-	<servlet-name>QuestionAlter</servlet-name>
- 	<servlet-class>com.javaweb.servlet.QuestionAlter</servlet-class>
-  </servlet>
-  <servlet>
-	<servlet-name>QuestionDelete</servlet-name>
- 	<servlet-class>com.javaweb.servlet.QuestionDelete</servlet-class>
-  </servlet>
- 
-  <servlet>
-	<servlet-name>PaperAutoGenerate</servlet-name>
- 	<servlet-class>com.javaweb.servlet.PaperAutoGenerate</servlet-class>
-  </servlet>
-  <servlet>
-	<servlet-name>PaperManulGenerate</servlet-name>
- 	<servlet-class>com.javaweb.servlet.PaperManulGenerate</servlet-class>
-  </servlet>
-  <servlet>
-	<servlet-name>Download</servlet-name>
- 	<servlet-class>com.javaweb.servlet.Download</servlet-class>
-  </servlet>
+  <filter-mapping >
+  	<filter-name>CharSetAndLoginFilter</filter-name>	<!-- 类名 这个名要跟上面的类名保持一致 -->
+  	<url-pattern>/download/*</url-pattern>	<!-- 这里的路径/*代表过滤所有页面 -->
+  </filter-mapping>
   
   <error-page> 
     <error-code>404</error-code> 

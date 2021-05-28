@@ -24,5 +24,4 @@ public interface IUserService {
 	 * 删除用户信息方法
 	 */
 	public boolean deleteUserInfo(String username) throws Exception;
-
 }

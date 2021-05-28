@@ -14,12 +14,10 @@ public class QuestionOperateImpl implements IQuestionOperate {
 		// TODO Auto-generated method stub
 		try {
 			for(Question vo : vos) {
-				if(DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).findQuestionByTitleAndConent(vo) == null) {
+				if(DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).findQuestionByTitleAndContent(vo) == null) {
 					if(!DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).doCreate(vo)) {
 						return false;
 					}
-				}else {
-					return false;
 				}
 			}
 			return true;
@@ -163,7 +161,7 @@ public class QuestionOperateImpl implements IQuestionOperate {
 		vo.setDifficulty(null);
 		vo.setIsMulti(null);
 		try {
-			return DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).findQuestionByTitleAndConent(vo);
+			return DAOFactory.getIQuestionDAOInstance(this.dbc.getConnection()).findQuestionByTitleAndContent(vo);
 		}catch(Exception e) {
 			throw e;
 		}finally {

@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.javaweb.factory.ServiceFactory;
 import com.javaweb.service.IQuestionOperate;
 import com.javaweb.vo.ObjectListTemplate;
@@ -99,7 +100,7 @@ public class QuestionQuery extends HttpServlet {
 			} break;
 		case 4:
 			try {
-				list.addAll(qo.queryQuestionByTitleAndIsMulti(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Boolean.parseBoolean(qs.getQueryParameter()[3])));
+				list.addAll(qo.queryQuestionByTitleAndIsMulti(qs.getQueryParameter()[0], qs.getQueryParameter()[1], Boolean.parseBoolean(qs.getQueryParameter()[2])));
 			} catch (Exception e) {
 				e.printStackTrace();
 			} break;
@@ -109,6 +110,12 @@ public class QuestionQuery extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} break;
+		default:
+			JSONObject errorOut = new JSONObject();
+			errorOut.put("result", "不支持的服务类型");
+			response.getWriter().write(JSON.toJSONString(out));
+			response.getWriter().close();
+			return;
 		}
 		out.setIndex(list);
 		response.getWriter().write(JSON.toJSONString(out));
